@@ -1,0 +1,19 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: stress-no-limits
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: stress-no-limits
+  template:
+    metadata:
+      labels:
+        app: stress-no-limits
+    spec:
+      containers:
+      - name: stress
+        image: polinux/stress
+        command: ["stress"]
+        args: ["--cpu", "2", "--vm", "1", "--vm-bytes", "300M", "--timeout", "300s"]
